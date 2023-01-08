@@ -1,22 +1,20 @@
 {
-    "name": "be-production-move",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "engines": {
-      "node": "16.x"
-    },
-    "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1",
-      "start": "node index.js"
-    },
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-      
-      "nodemon": "2.0.20",
-      "express": "^4.18.2"
-
-    }
+  "name": "vercel-testing",
+  "version": "1.0.0",
+  "description": "node express testing",
+  "main": "index.js",
+  "engines": {
+    "node": "16.x"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.3",
+    "nodemon": "^2.0.15"
   }
-  
+}

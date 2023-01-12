@@ -5,10 +5,10 @@ import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import Filter from "../../components/filter";
 import { DeleteOutlined } from "@ant-design/icons";
+import ProductCard from "./ProductCard";
 const { Meta } = Card;
 const pageSize = 8;
 const ProductList = () => {
-  const handleClickImageEvent = () => {};
   const [product, setProduct] = useState(["helo"]);
   const handleChange = () => {};
   return (
@@ -19,113 +19,7 @@ const ProductList = () => {
       </Space.Compact>
 
       {product.map((product, index) => (
-        <>
-          <Card
-            hoverable
-            bordered={true}
-            className="card-layout"
-            cover={
-              <img
-                alt="example"
-                src="https://images.pexels.com/photos/301599/pexels-photo-301599.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                className="postImage"
-                onClick={() => handleClickImageEvent(product)}
-              />
-            }
-            actions={[
-              <DeleteOutlined key="delete" />,
-              <Checkbox key="checkbox" />,
-            ]}
-          >
-            <Meta
-              title="test ui"
-              description={
-                <>
-                  <p>Tỉ lệ chí mạng: </p>
-                  <Space.Compact
-                    block
-                    style={{ justifyContent: "space-between" }}
-                  >
-                    <Rate style={{ fontSize: "1rem" }} />
-                    <span>Sold: 10</span>
-                  </Space.Compact>
-                </>
-              }
-            />
-          </Card>
-          <Card
-            hoverable
-            bordered={true}
-            className="card-layout"
-            cover={
-              <img
-                alt="example"
-                src="https://images.pexels.com/photos/301599/pexels-photo-301599.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                className="postImage"
-                onClick={() => handleClickImageEvent(product)}
-              />
-            }
-          >
-            <Meta
-              title="test ui"
-              description={
-                <>
-                  <p>Điểm tấn công: </p>
-                  <p>Điểm phòng thủ: </p>
-                  <p>Tỉ lệ chí mạng: </p>
-                </>
-              }
-            />
-          </Card>
-          <Card
-            hoverable
-            bordered={true}
-            className="card-layout"
-            cover={
-              <img
-                alt="example"
-                src="https://images.pexels.com/photos/301599/pexels-photo-301599.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                className="postImage"
-                onClick={() => handleClickImageEvent(product)}
-              />
-            }
-          >
-            <Meta
-              title="test ui"
-              description={
-                <>
-                  <p>Điểm tấn công: </p>
-                  <p>Điểm phòng thủ: </p>
-                  <p>Tỉ lệ chí mạng: </p>
-                </>
-              }
-            />
-          </Card>
-          <Card
-            hoverable
-            bordered={true}
-            className="card-layout"
-            cover={
-              <img
-                alt="example"
-                src="https://images.pexels.com/photos/301599/pexels-photo-301599.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                className="postImage"
-                onClick={() => handleClickImageEvent(product)}
-              />
-            }
-          >
-            <Meta
-              title="test ui"
-              description={
-                <>
-                  <p>Điểm tấn công: </p>
-                  <p>Điểm phòng thủ: </p>
-                  <p>Tỉ lệ chí mạng: </p>
-                </>
-              }
-            />
-          </Card>
-        </>
+        <ProductCard />
       ))}
       <Pagination
         pageSize={pageSize}

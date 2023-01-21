@@ -3,6 +3,7 @@ const db = require("../models");
 const Comments = db.comment;
 const Products = db.product;
 var ObjectId = require("mongodb").ObjectId;
+const general = require("./generalController");
 class APIfeatures {
   constructor(query, queryString) {
     this.query = query;
@@ -22,6 +23,7 @@ class APIfeatures {
 }
 
 exports.getCommentsByProductId = async (req, res) => {
+  general.setResHeader(res);
   try {
     const features = new APIfeatures(
       Comments.find({ product_id: req.params.productId }),

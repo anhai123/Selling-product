@@ -1,6 +1,6 @@
 const db = require("../models");
 const Products = db.product;
-
+const general = require("./generalController");
 class APIfeatures {
   constructor(query, queryString) {
     this.query = query;
@@ -47,6 +47,7 @@ class APIfeatures {
 }
 
 exports.getProducts = async (req, res) => {
+  general.setResHeader(res);
   console.log(req.query);
   try {
     const features = new APIfeatures(Products.find(), req.query)
@@ -66,6 +67,7 @@ exports.getProducts = async (req, res) => {
   }
 };
 exports.createProduct = async (req, res) => {
+  general.setResHeader(res);
   console.log(req.body);
   try {
     const { title, price, description, content, images, category } = req.body;
@@ -89,6 +91,7 @@ exports.createProduct = async (req, res) => {
   }
 };
 exports.updateProduct = async (req, res) => {
+  general.setResHeader(res);
   try {
     const { title, price, description, content, images, category } = req.body;
     if (!images) {
@@ -113,6 +116,7 @@ exports.updateProduct = async (req, res) => {
   }
 };
 exports.deleteProduct = async (req, res) => {
+  general.setResHeader(res);
   try {
     await Products.findByIdAndDelete(req.params.id);
     return res.json({ msg: "Deleted a Product" });
@@ -121,6 +125,7 @@ exports.deleteProduct = async (req, res) => {
   }
 };
 exports.reviews = async (req, res) => {
+  general.setResHeader(res);
   try {
     const { star } = req.body;
     if (star && star !== 0) {

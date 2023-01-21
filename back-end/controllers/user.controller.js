@@ -21,7 +21,7 @@ exports.moderatorBoard = (req, res) => {
 };
 
 exports.getUser = async (req, res) => {
-  general.setResHeader(res);
+  res = general.setResHeader(res);
   console.log("Id ng dung: " + req.userId);
   try {
     const user = await Users.findById(req.userId).select("-password");
@@ -35,7 +35,7 @@ exports.getUser = async (req, res) => {
   }
 };
 exports.addCart = async (req, res) => {
-  general.setResHeader(res);
+  res = general.setResHeader(res);
   try {
     const user = await Users.findById(req.userId);
     if (!user) {
@@ -71,7 +71,7 @@ exports.addCart = async (req, res) => {
 };
 
 exports.history = async (req, res) => {
-  general.setResHeader(res);
+  res = general.setResHeader(res);
   try {
     const history = await Payments.find({ user_id: req.userId });
     return res.json(history);

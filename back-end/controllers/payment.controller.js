@@ -6,7 +6,7 @@ const Users = db.user;
 var ObjectId = require("mongodb").ObjectId;
 const general = require("./generalController");
 exports.getPayments = async (req, res) => {
-  general.setResHeader(res);
+  res = general.setResHeader(res);
   try {
     const payments = await Payments.find();
     return res.json(payments);
@@ -16,7 +16,7 @@ exports.getPayments = async (req, res) => {
 };
 
 exports.createPayment = async (req, res) => {
-  general.setResHeader(res);
+  res = general.setResHeader(res);
   try {
     const user = await Users.findById(req.userId).select("username email");
     if (!user) {

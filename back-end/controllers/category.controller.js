@@ -5,7 +5,7 @@ const Products = db.product;
 var ObjectId = require("mongodb").ObjectId;
 const general = require("./generalController");
 exports.getCategories = async (req, res) => {
-  general.setResHeader(res);
+  res = general.setResHeader(res);
   try {
     const categories = await Category.find();
     return res.json(categories);
@@ -15,7 +15,7 @@ exports.getCategories = async (req, res) => {
 };
 
 exports.createCategory = async (req, res) => {
-  general.setResHeader(res);
+  res = general.setResHeader(res);
   try {
     const { name } = req.body;
     const category = await Category.findOne({ name });
@@ -33,7 +33,7 @@ exports.createCategory = async (req, res) => {
 };
 
 exports.updateCategory = async (req, res) => {
-  general.setResHeader(res);
+  res = general.setResHeader(res);
   try {
     const { name } = req.body;
     await Category.findOneAndUpdate({ _id: req.params.id }, { name });
@@ -44,7 +44,7 @@ exports.updateCategory = async (req, res) => {
   }
 };
 exports.deleteCategory = async (req, res) => {
-  general.setResHeader(res);
+  res = general.setResHeader(res);
   try {
     const products = await Products.findOne({ category: req.params.id });
     console.log("products", products);

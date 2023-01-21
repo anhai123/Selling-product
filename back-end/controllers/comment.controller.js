@@ -23,7 +23,7 @@ class APIfeatures {
 }
 
 exports.getCommentsByProductId = async (req, res) => {
-  general.setResHeader(res);
+  res = general.setResHeader(res);
   try {
     const features = new APIfeatures(
       Comments.find({ product_id: req.params.productId }),

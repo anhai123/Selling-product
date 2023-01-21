@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   Button,
   Form,
@@ -8,7 +8,11 @@ import {
   Space,
   Table,
   Typography,
+  message,
 } from "antd";
+
+import { GlobalState } from "../../GlobalState";
+import categoryService from "../../services/category.service";
 const originData = [
   {
     key: 1,
@@ -52,8 +56,25 @@ const EditableCell = ({
 };
 const CategoryList = () => {
   const [form] = Form.useForm();
-  const [data, setData] = useState(originData);
+  const [data, setData] = useState([]);
   const [editingKey, setEditingKey] = useState("");
+  const state = useContext(GlobalState);
+  const [categories] = state.categoriesAPI.categories;
+  const [callback, setCallback] = state.categoriesAPI.callback;
+  const [onEdit, setOnEdit] = useState(false);
+  const [id, setID] = useState("");
+
+  useEffect(() => {
+    setData(
+      categories.map((category) => {
+        return {
+          key: category._id,
+          name: category.name,
+        };
+      })
+    );
+  }, [categories]);
+
   const isEditing = (record) => record.key === editingKey;
   const edit = (record) => {
     form.setFieldsValue({
@@ -64,27 +85,55 @@ const CategoryList = () => {
     });
     setEditingKey(record.key);
   };
+  const deleteCategory = (record) => {
+    console.log(record);
+    categoryService.deleteCategory(record.key).then(
+      (response) => {
+        console.log(response);
+        message.success("delete category successfully");
+        setCallback(!callback);
+      },
+      (error) => {
+        const _content =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+
+        console.log(_content);
+        message.error(_content);
+      }
+    );
+  };
   const cancel = () => {
     setEditingKey("");
   };
   const save = async (key) => {
     try {
       const row = await form.validateFields();
+      console.log(row);
       const newData = [...data];
       const index = newData.findIndex((item) => key === item.key);
-      if (index > -1) {
-        const item = newData[index];
-        newData.splice(index, 1, {
-          ...item,
-          ...row,
-        });
-        setData(newData);
-        setEditingKey("");
-      } else {
-        newData.push(row);
-        setData(newData);
-        setEditingKey("");
-      }
+      categoryService.putCategory(key, row.name).then(
+        (response) => {
+          console.log(response);
+          message.success("update category name successfully");
+          setCallback(!callback);
+          setEditingKey("");
+        },
+        (error) => {
+          const _content =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString();
+
+          console.log(_content);
+          message.error(_content);
+        }
+      );
     } catch (errInfo) {
       console.log("Validate Failed:", errInfo);
     }
@@ -124,7 +173,7 @@ const CategoryList = () => {
             >
               <Button>EDIT</Button>
             </Typography.Link>
-            <Typography.Link>
+            <Typography.Link onClick={() => deleteCategory(record)}>
               <Button>DELETE</Button>
             </Typography.Link>
           </Space>

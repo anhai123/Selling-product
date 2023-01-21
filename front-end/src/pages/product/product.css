@@ -1,5 +1,6 @@
 .site-card-border-less-wrapper {
     padding: 30px 50px;
+    min-width: 92.2%;
     background: #ececec;
     display: flex;
     justify-content: flex-start;
@@ -29,7 +30,7 @@ position: absolute;
 }
 .ant-card-cover{
   padding: 0px;
-  
+  height: 200px;
 }
 .ant-card-meta-description p {
   margin-bottom: 5px;

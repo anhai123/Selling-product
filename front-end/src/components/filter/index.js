@@ -1,10 +1,13 @@
 import React, { useContext } from "react";
-
+import { GlobalState } from "../../GlobalState";
 import { Select } from "antd";
 
 const Filter = () => {
+  const state = useContext(GlobalState);
+  const [sort, setSort] = state.productsAPI.sort;
   const handleChange = (value) => {
     console.log(`selected ${value}`);
+    setSort(value);
   };
   return (
     <div>

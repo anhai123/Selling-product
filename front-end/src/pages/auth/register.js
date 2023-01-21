@@ -1,9 +1,27 @@
 import React from "react";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Checkbox, Form, Input, Row, Col, Card } from "antd";
+import { Button, Checkbox, Form, Input, Row, Col, Card, message } from "antd";
+import authService from "../../services/auth.service";
 const Register = () => {
   const onFinish = (values) => {
     console.log("Received values of form: ", values);
+    authService.register(values.username, values.email, values.password).then(
+      (response) => {
+        console.log(response);
+        message.success("register successfully");
+      },
+      (error) => {
+        const _content =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+
+        console.log(_content);
+        message.error("register fail");
+      }
+    );
   };
   return (
     <Row

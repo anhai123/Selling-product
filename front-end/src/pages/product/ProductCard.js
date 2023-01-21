@@ -1,8 +1,30 @@
-import { Card, Descriptions, Pagination, Checkbox, Space, Rate } from "antd";
+import {
+  Card,
+  Descriptions,
+  Pagination,
+  Checkbox,
+  Space,
+  Rate,
+  Typography,
+  message,
+  Popconfirm,
+} from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
+import StarRatings from "react-star-ratings";
+import { Link } from "react-router-dom";
 const { Meta } = Card;
+const { Text, Paragraph } = Typography;
 const ProductCard = ({ product, isAdmin, deleteProduct, handleCheck }) => {
   const handleClickImageEvent = () => {};
+  const handelDeleteProduct = () => {};
+
+  const confirm = (e) => {
+    console.log(e);
+    deleteProduct(product._id);
+  };
+  const cancel = (e) => {
+    console.log(e);
+  };
   return (
     <>
       <Card
@@ -12,97 +34,72 @@ const ProductCard = ({ product, isAdmin, deleteProduct, handleCheck }) => {
         cover={
           <img
             alt="example"
-            src="https://images.pexels.com/photos/301599/pexels-photo-301599.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            src={product.images}
             className="postImage"
             onClick={() => handleClickImageEvent(product)}
           />
         }
-        actions={[<DeleteOutlined key="delete" />, <Checkbox key="checkbox" />]}
-      >
-        <Meta
-          title="test ui"
-          description={
-            <>
-              <p>Tỉ lệ chí mạng: </p>
-              <Space.Compact block style={{ justifyContent: "space-between" }}>
-                <Rate style={{ fontSize: "1rem" }} />
-                <span>Sold: 10</span>
-              </Space.Compact>
-            </>
-          }
-        />
-      </Card>
-      <Card
-        hoverable
-        bordered={true}
-        className="card-layout"
-        cover={
-          <img
-            alt="example"
-            src="https://images.pexels.com/photos/301599/pexels-photo-301599.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-            className="postImage"
-            onClick={() => handleClickImageEvent(product)}
-          />
+        actions={
+          isAdmin && [
+            <Popconfirm
+              title="Delete the task"
+              description="Are you sure to delete this task?"
+              onConfirm={confirm}
+              onCancel={cancel}
+              okText="Yes"
+              cancelText="No"
+            >
+              <DeleteOutlined key="delete" />
+            </Popconfirm>,
+            <Checkbox
+              key="checkbox"
+              checked={product.checked}
+              onClick={() => handleCheck(product._id)}
+            />,
+          ]
         }
       >
-        <Meta
-          title="test ui"
-          description={
-            <>
-              <p>Điểm tấn công: </p>
-              <p>Điểm phòng thủ: </p>
-              <p>Tỉ lệ chí mạng: </p>
-            </>
+        <Link
+          to={
+            isAdmin ? `/edit_product/${product._id}` : `/detail/${product._id}`
           }
-        />
-      </Card>
-      <Card
-        hoverable
-        bordered={true}
-        className="card-layout"
-        cover={
-          <img
-            alt="example"
-            src="https://images.pexels.com/photos/301599/pexels-photo-301599.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-            className="postImage"
-            onClick={() => handleClickImageEvent(product)}
+        >
+          <Meta
+            title={product.title}
+            description={
+              <>
+                <Text code strong>
+                  {product.price} $
+                </Text>
+                <Text
+                  style={{ width: "190px" }}
+                  ellipsis={{
+                    rows: 3,
+                  }}
+                >
+                  {product.content}
+                </Text>
+                <Space.Compact
+                  block
+                  style={{ justifyContent: "space-between" }}
+                >
+                  <StarRatings
+                    rating={
+                      product.numReviews > 0
+                        ? product.star / product.numReviews
+                        : 0
+                    }
+                    starDimension="15px"
+                    starSpacing="4px"
+                    starRatedColor="rgb(230, 67, 47)"
+                  />
+                  {/* <Rate style={{ fontSize: "14px" }}></Rate> */}
+                  <span>Sold: {product.sold ? product.sold : 0}</span>
+                </Space.Compact>
+              </>
+            }
           />
-        }
-      >
-        <Meta
-          title="test ui"
-          description={
-            <>
-              <p>Điểm tấn công: </p>
-              <p>Điểm phòng thủ: </p>
-              <p>Tỉ lệ chí mạng: </p>
-            </>
-          }
-        />
-      </Card>
-      <Card
-        hoverable
-        bordered={true}
-        className="card-layout"
-        cover={
-          <img
-            alt="example"
-            src="https://images.pexels.com/photos/301599/pexels-photo-301599.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-            className="postImage"
-            onClick={() => handleClickImageEvent(product)}
-          />
-        }
-      >
-        <Meta
-          title="test ui"
-          description={
-            <>
-              <p>Điểm tấn công: </p>
-              <p>Điểm phòng thủ: </p>
-              <p>Tỉ lệ chí mạng: </p>
-            </>
-          }
-        />
+        </Link>
       </Card>
     </>
   );

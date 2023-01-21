@@ -9,10 +9,12 @@ import {
   LikeOutlined,
 } from "@ant-design/icons";
 import "./comment.css";
-const CommentItem = () => {
+import StarRatings from "react-star-ratings";
+const CommentItem = ({ comment }) => {
   const [likes, setLikes] = useState(0);
   const [dislikes, setDislikes] = useState(0);
   const [action, setAction] = useState(null);
+  console.log(comment);
   const like = () => {
     setLikes(1);
     setDislikes(0);
@@ -23,46 +25,47 @@ const CommentItem = () => {
     setDislikes(1);
     setAction("disliked");
   };
-  const actions = [
-    <Tooltip key="comment-basic-like" title="Like">
-      <span onClick={like}>
-        {createElement(action === "liked" ? LikeFilled : LikeOutlined)}
-        <span className="comment-action">{likes}</span>
-      </span>
-    </Tooltip>,
-    <Tooltip key="comment-basic-dislike" title="Dislike">
-      <span onClick={dislike}>
-        {React.createElement(
-          action === "disliked" ? DislikeFilled : DislikeOutlined
-        )}
-        <span className="comment-action">{dislikes}</span>
-      </span>
-    </Tooltip>,
-    <span key="comment-basic-reply-to">Reply to</span>,
-  ];
+  // const actions = [
+  //   <Tooltip key="comment-basic-like" title="Like">
+  //     <span onClick={like}>
+  //       {createElement(action === "liked" ? LikeFilled : LikeOutlined)}
+  //       <span className="comment-action">{likes}</span>
+  //     </span>
+  //   </Tooltip>,
+  //   <Tooltip key="comment-basic-dislike" title="Dislike">
+  //     <span onClick={dislike}>
+  //       {React.createElement(
+  //         action === "disliked" ? DislikeFilled : DislikeOutlined
+  //       )}
+  //       <span className="comment-action">{dislikes}</span>
+  //     </span>
+  //   </Tooltip>,
+  //   <span key="comment-basic-reply-to">Reply to</span>,
+  // ];
   return (
-    <Comment
-      actions={actions}
-      author={<a>Han Solo</a>}
-      avatar={
-        <Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />
-      }
-      content={
-        <>
-          <Rate />
-          <p>
-            We supply a series of design principles, practical patterns and high
-            quality design resources (Sketch and Axure), to help people create
-            their product prototypes beautifully and
-            efficiently.nnnnnnnnnnnnnnnnnnnytnty
-          </p>
-        </>
-      }
-      datetime={
-        <Tooltip title="2016-11-22 11:22:33">
-          <span>{moment("2012-10-15T21:26:17Z").fromNow()}</span>
+    comment && (
+      <Comment
+        // actions={actions}
+        author={<a>Han Solo</a>}
+        avatar={
+          <Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />
+        }
+        content={
+          <>
+            <StarRatings
+              rating={comment.star}
+              starDimension="15px"
+              starSpacing="4px"
+              starRatedColor="rgb(230, 67, 47)"
+            />
+            <p>{comment.content}</p>
+          </>
+        }
+        datetime={
+          <Tooltip title="2016-11-22 11:22:33">
+            <span>{moment(comment.createdAt).fromNow()}</span>
 
-          {/* <Rate
+            {/* <Rate
             style={{
               position: "absolute",
               zIndex: "1",
@@ -72,9 +75,10 @@ const CommentItem = () => {
               lineHeight: "14px",
             }}
           /> */}
-        </Tooltip>
-      }
-    />
+          </Tooltip>
+        }
+      />
+    )
   );
 };
 

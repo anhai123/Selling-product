@@ -1,9 +1,38 @@
 import React from "react";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Checkbox, Form, Input, Row, Col, Card, Space } from "antd";
+import {
+  Button,
+  Checkbox,
+  Form,
+  Input,
+  Row,
+  Col,
+  Card,
+  Space,
+  message,
+} from "antd";
+import authService from "../../services/auth.service";
 const Login = () => {
   const onFinish = (values) => {
     console.log("Received values of form: ", values);
+    authService.login(values.username, values.password).then(
+      (response) => {
+        console.log(response);
+        message.success("login successfully");
+        window.location.href = "/";
+      },
+      (error) => {
+        const _content =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+
+        console.log(_content);
+        message.error(_content);
+      }
+    );
   };
   return (
     <Row
@@ -95,7 +124,7 @@ const Login = () => {
                 }}
               >
                 {" "}
-                Or <a href="">register now!</a>
+                Or <a href="register">register now!</a>
               </span>
             </Form.Item>
           </Form>

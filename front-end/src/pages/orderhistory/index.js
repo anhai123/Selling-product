@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Space, Table, Tag, Layout, Typography } from "antd";
 import "./orderhis.css";
 import BackButton from "../../components/BackButton";
+import { GlobalState } from "../../GlobalState";
+import { Link } from "react-router-dom";
 const { Title, Text } = Typography;
 const { Header, Footer, Sider, Content } = Layout;
 const columns = [
@@ -22,27 +24,31 @@ const columns = [
   {
     title: "Action",
     key: "action",
-    render: (_, record) => <a>View</a>,
+    render: (_, record) => (
+      <Link
+        to={`/history/${record.paymentId}`}
+        className="font-bold underline text-blue-500"
+      >
+        View
+      </Link>
+    ),
   },
 ];
-const data = [
-  {
-    paymentId: "1",
-    purchaseDate: 32,
-  },
-  {
-    paymentId: "2",
-    purchaseDate: 42,
-  },
-  {
-    paymentId: "3",
-    purchaseDate: 32,
-  },
-];
+
 const OrderHistory = () => {
+  const state = useContext(GlobalState);
+  const [history] = state.userAPI.history;
+  console.log(history);
+
+  const data = history.map((his) => {
+    return {
+      paymentId: his._id,
+      purchaseDate: new Date(his.createdAt).toLocaleDateString(),
+    };
+  });
   return (
     <Layout>
-      <Header>
+      <Header style={{ backgroundColor: "#0000f642" }}>
         <div>
           <div style={{ display: "inline-block", verticalAlign: "top" }}>
             <BackButton />
@@ -62,6 +68,9 @@ const OrderHistory = () => {
         {/* <div style={{ clear: "both" }}></div> */}
       </Header>
       <Content>
+        <h4 style={{ paddingLeft: "16px" }}>
+          You have {history.length} ordered
+        </h4>
         <Table columns={columns} dataSource={data} />
       </Content>
     </Layout>

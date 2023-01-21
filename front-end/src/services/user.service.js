@@ -1,6 +1,6 @@
 import axios from "axios";
 import authHeader from "./auth-header";
-const API_URL = "http://localhost:9001/api/shopping/user/";
+const API_URL = "https://selling-product.vercel.app/api/shopping/user/";
 const patchItemInCart = (userId, cart) => {
   return axios
     .patch(

@@ -170,72 +170,73 @@ const Cart = () => {
       cancelText: "Cancel",
     });
   };
-
-  return (
-    <>
+  if (cart.length === 0) {
+    return <EmptyCartPage />;
+  } else
+    return (
       <>
-        <List
-          className="demo-loadmore-list"
-          itemLayout="horizontal"
-          dataSource={list}
-          renderItem={(item) => (
-            <Card>
-              {cart.map((product) => {
-                return (
-                  <List.Item
-                    actions={[
-                      <Text code strong>
-                        $ {product.price * product.quantity}
-                      </Text>,
-                      <InputNumber
-                        key={product._id}
-                        onStep={(value, info) =>
-                          handleChangeProductNumber(value, info, product._id)
-                        }
-                        min={1}
-                        defaultValue={1}
-                      ></InputNumber>,
-                      <a key="list-loadmore-edit">
-                        <DeleteOutlined
-                          onClick={() => removeProduct(product._id)}
-                        />
-                      </a>,
-                    ]}
-                  >
-                    <Skeleton
-                      avatar
-                      title={false}
-                      loading={item.loading}
-                      active
+        <>
+          <List
+            className="demo-loadmore-list"
+            itemLayout="horizontal"
+            dataSource={list}
+            renderItem={(item) => (
+              <Card>
+                {cart.map((product) => {
+                  return (
+                    <List.Item
+                      actions={[
+                        <Text code strong>
+                          $ {product.price * product.quantity}
+                        </Text>,
+                        <InputNumber
+                          key={product._id}
+                          onStep={(value, info) =>
+                            handleChangeProductNumber(value, info, product._id)
+                          }
+                          min={1}
+                          defaultValue={1}
+                        ></InputNumber>,
+                        <a key="list-loadmore-edit">
+                          <DeleteOutlined
+                            onClick={() => removeProduct(product._id)}
+                          />
+                        </a>,
+                      ]}
                     >
-                      <List.Item.Meta
-                        avatar={<Image width={200} src={product.images} />}
-                        title={<h2>{product.title}</h2>}
-                        description={product.description}
-                      />
-                    </Skeleton>
-                  </List.Item>
-                );
-              })}
-            </Card>
-          )}
-        />
-        <div
-          style={{
-            display: "flex",
-            paddingTop: "0px",
-            justifyContent: "space-between",
-            padding: "24px",
-          }}
-        >
-          <Text code strong style={{ fontSize: "30px" }}>
-            Total: $ {total}
-          </Text>
-          <Button onClick={handleBuyNow}>Buy Now</Button>
-        </div>
+                      <Skeleton
+                        avatar
+                        title={false}
+                        loading={item.loading}
+                        active
+                      >
+                        <List.Item.Meta
+                          avatar={<Image width={200} src={product.images} />}
+                          title={<h2>{product.title}</h2>}
+                          description={product.description}
+                        />
+                      </Skeleton>
+                    </List.Item>
+                  );
+                })}
+              </Card>
+            )}
+          />
+          <div
+            style={{
+              display: "flex",
+              paddingTop: "0px",
+              justifyContent: "space-between",
+              padding: "24px",
+            }}
+          >
+            <Text code strong style={{ fontSize: "30px" }}>
+              Total: $ {total}
+            </Text>
+            <Button onClick={handleBuyNow}>Buy Now</Button>
+          </div>
+        </>
       </>
-    </>
-  );
-  // return <EmptyCartPage />;
+    );
 };
 export default Cart;

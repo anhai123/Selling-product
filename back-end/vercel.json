@@ -9,38 +9,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/"
-    },
-    {
-      "src": "/shopping/auth/(.*)",
-      "dest": "/"
-    },
-    {
-      "src": "/categories/(.*)",
-      "dest": "/"
-    },
-
-    {
-      "src": "/api/comments/(.*)",
-      "dest": "/"
+      "dest": "/index.js"
     }
-    ,
-
-    {
-      "src": "/payment/(.*)",
-      "dest": "/"
-    },
-
-    {
-      "src": "/products/(.*)",
-      "dest": "/"
-    }
-    ,
-
-    {
-      "src": "/api/shopping/user/(.*)",
-      "dest": "/"
-    }
-    
   ]
 }

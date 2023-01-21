@@ -9,7 +9,39 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/index.js"
+      "dest": "/"
+    },
+    {
+      "src": "/shopping/auth/(.*)",
+      "dest": "/"
+    },
+    {
+      "src": "/categories/(.*)",
+      "dest": "/"
+    },
+
+    {
+      "src": "/api/comments/(.*)",
+      "dest": "/"
     }
-  ]
+    ,
+
+    {
+      "src": "/payment/(.*)",
+      "dest": "/"
+    },
+
+    {
+      "src": "/products/(.*)",
+      "dest": "/"
+    }
+    ,
+
+    {
+      "src": "/api/shopping/user/(.*)",
+      "dest": "/"
+    }
+    
+  ],
+    "rewrites": [{ "source": "/products/:limit/:categorySelected/:sort/:title[regex]", "destination": "/product" }]
 }

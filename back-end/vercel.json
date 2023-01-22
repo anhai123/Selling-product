@@ -13,5 +13,5 @@
     }
     
   ],
-    "rewrites": [{ "source": "products/:limit/:categorySelected/:sort/:title[regex]", "destination": "https://selling-product.vercel.app/products" }]
+    "rewrites": [{ "source": "/products/:limit/:categorySelected/:sort/:title[regex]", "destination": "https://selling-product.vercel.app/products/:limit/:categorySelected/:sort/:title[regex]" }]
 }

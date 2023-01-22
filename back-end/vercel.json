@@ -7,5 +7,10 @@
     }
   ],
 
-  "rewrites": [{ "source": "/(.*)", "destination": "/home" }]
+  "rewrites": [{ "source": "/(.*)", "destination": "/" },
+    {
+      "source": "/categories/(.*)",
+      "destination": "/categories"
+    }
+  ]
 }

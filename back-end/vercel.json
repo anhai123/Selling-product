@@ -14,6 +14,7 @@
     },
     {
       "source": "/categories/:id",
+      "methods": ["POST"],
       "destination": "/categories/:id"
     }
   ]

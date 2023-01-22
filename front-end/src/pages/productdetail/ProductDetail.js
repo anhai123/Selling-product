@@ -36,7 +36,9 @@ const ProductDetail = () => {
   useEffect(() => {
     const getComments = async () => {
       const response = await axios.get(
-        `/api/comments/${params.id}?limit=${pageComment * 5}`
+        `https://selling-product.vercel.app/api/comments/${params.id}?limit=${
+          pageComment * 5
+        }`
       );
       setComments(response.data.comments);
       setResultComment(response.data.result);

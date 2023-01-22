@@ -6,16 +6,43 @@
       "use": "@vercel/node"
     }
   ],
-
-  "rewrites": [{ "source": "/(.*)", "destination": "/" },
+  "routes": [
     {
-      "source": "/categories/(.*)",
-      "destination": "/categories"
+      "src": "/(.*)",
+      "dest": "/home"
+    },
+
+    {
+      "src": "/shopping/auth/(.*)",
+      "dest": "/"
     },
     {
-      "source": "/categories/:id",
-      "methods": ["POST"],
-      "destination": "/categories/:id"
+      "src": "/categories/(.*)",
+      "dest": "/"
+    },
+
+    {
+      "src": "/api/comments/(.*)",
+      "dest": "/"
     }
+    ,
+
+    {
+      "src": "/payment/(.*)",
+      "dest": "/"
+    },
+
+    {
+      "src": "/products/(.*)",
+      "dest": "/"
+    }
+    ,
+
+    {
+      "src": "/api/shopping/user/(.*)",
+      "dest": "/"
+    }
+    
   ]
+  
 }

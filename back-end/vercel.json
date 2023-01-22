@@ -12,6 +12,6 @@
       "dest": "/home"
     }
     
-  ],
-    "rewrites": [{ "source": "/products/:limit/:categorySelected/:sort/:title[regex]", "destination": "/products/" }]
+  ]
+    
 }

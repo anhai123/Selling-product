@@ -11,6 +11,10 @@
     {
       "source": "/categories/(.*)",
       "destination": "/categories"
+    },
+    {
+      "source": "/categories/:id",
+      "destination": "/categories/:id"
     }
   ]
 }

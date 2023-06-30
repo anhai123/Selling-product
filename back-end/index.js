@@ -14,12 +14,12 @@ const { Server } = require("socket.io");
 
 const io = require("socket.io")(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "https://selling-product-qmv4.vercel.app",
     methods: ["GET", "POST"],
   },
 });
 var corsOptions = {
-  origin: "http://localhost:3000",
+  origin: "https://selling-product-qmv4.vercel.app",
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };

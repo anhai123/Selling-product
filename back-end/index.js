@@ -14,7 +14,7 @@ const { Server } = require("socket.io");
 
 const io = require("socket.io")(server, {
   cors: {
-    origin: "https://selling-product-qmv4.vercel.app",
+    origin: "*",
     methods: ["GET", "POST"],
   },
 });

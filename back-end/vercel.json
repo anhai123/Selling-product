@@ -41,6 +41,14 @@
     {
       "src": "/api/shopping/user/(.*)",
       "dest": "/"
+    },
+
+    {
+      "src": "/socket.io/(.*)",
+      "dest": "/",
+      "headers": {
+        "Access-Control-Allow-Origin": "*"
+      }
     }
     
   ]

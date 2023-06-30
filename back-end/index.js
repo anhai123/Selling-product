@@ -19,7 +19,7 @@ const io = require("socket.io")(server, {
   },
 });
 var corsOptions = {
-  origin: "https://selling-product-qmv4.vercel.app",
+  origin: "http://localhost:3000",
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };

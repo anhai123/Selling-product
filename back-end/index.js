@@ -19,19 +19,19 @@ const io = require("socket.io")(server, {
     // allowedHeaders: ["my-custom-header"],
   },
 });
-// var corsOptions = {
-//   origin: "http://localhost:3000",
-//   credentials: true, //access-control-allow-credentials:true
-//   optionSuccessStatus: 200,
-// };
-// app.use(cors(corsOptions));
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  res.header("Access-Control-Allow-Headers", "Content-Type");
-  res.header("Access-Control-Allow-Methods", "PUT, GET, POST, DELETE, OPTIONS");
-  next();
-});
+var corsOptions = {
+  origin: "http://localhost:3000",
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
+// app.use(function (req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", "X-Requested-With");
+//   res.header("Access-Control-Allow-Headers", "Content-Type");
+//   res.header("Access-Control-Allow-Methods", "PUT, GET, POST, DELETE, OPTIONS");
+//   next();
+// });
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 let users = [];

@@ -12,7 +12,7 @@ export const DataProvider = ({ children }) => {
   useEffect(() => {
     // socketio
     // const socket = io("http://localhost:9001/");
-    const socket = io("https://selling-product.vercel.app/");
+    const socket = io("https://selling-product.vercel.app");
     setSocket(socket);
     return () => socket.close();
   }, []);

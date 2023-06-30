@@ -13,9 +13,8 @@ export const DataProvider = ({ children }) => {
     // socketio
     // const socket = io("http://localhost:9001/");
     var connectionOptions = {
-      withCredentials: true,
       extraHeaders: {
-        "my-custom-header": "abcd",
+        "Access-Control-Allow-Origin": "*",
       },
     };
     const socket = io("https://selling-product.vercel.app/", connectionOptions);

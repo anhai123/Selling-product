@@ -55,7 +55,7 @@ const ProductDetail = () => {
 
       socket.on("sendCommentToClient", (data) => {
         setComments([data, ...comments]);
-        console.log(comments);
+        console.log(data);
       });
 
       return () => socket.off("sendCommentToClient");

@@ -16,7 +16,7 @@ const io = require("socket.io")(server, {
   cors: {
     origin: ["https://selling-product-qmv4.vercel.app"],
     methods: ["GET", "POST"],
-    allowedHeaders: ["my-custom-header"],
+    // allowedHeaders: ["my-custom-header"],
   },
 });
 // var corsOptions = {

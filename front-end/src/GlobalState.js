@@ -13,7 +13,6 @@ export const DataProvider = ({ children }) => {
     // socketio
     // const socket = io("http://localhost:9001/");
     var connectionOptions = {
-      "force new connection": true,
       reconnectionAttempts: "Infinity", //avoid having user reconnect manually in order to prevent dead clients after a server restart
       timeout: 10000, //before connect_error and connect_timeout are emitted.
       transports: ["websocket"],
@@ -21,7 +20,7 @@ export const DataProvider = ({ children }) => {
         "Access-Control-Allow-Origin": "*",
       },
     };
-    const socket = io("https://selling-product.vercel.app/");
+    const socket = io("https://selling-product.vercel.app/", connectionOptions);
     setSocket(socket);
     return () => socket.close();
   }, []);
